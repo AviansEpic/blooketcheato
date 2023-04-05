@@ -109,7 +109,7 @@
         
         function passcheck() {
             if (stateChanger.state.stage == "hack") {
-                PasswordCheck.innerText = "Player's Password: " + stateChanger.correctPassword;
+                PasswordCheck.innerText = "Player's Password: " + stateChanger.state.correctPassword;
             } else {
                 PasswordCheck.innerText = "Player's Password: ????";
             }
