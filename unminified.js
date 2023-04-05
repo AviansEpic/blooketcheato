@@ -109,9 +109,9 @@
         
         function passcheck() {
             if (stateChanger.stage == "hack") {
-                answer.innerText = "Player's Password: " + stateChanger.correctPassword;
+                password.innerText = "Player's Password: " + stateChanger.correctPassword;
             } else {
-                answer.innerText = "Player's Password: ????";
+                password.innerText = "Player's Password: ????";
             }
             
             setTimeout(passcheck, 50);
