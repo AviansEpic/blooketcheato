@@ -1,9 +1,6 @@
 /**
 * @author Bytecode
 * @version 0.01
-
-ATTENTION: Don't use this for Bookmarklets, it will most likely break. Use gui.js (https://github.com/AviansEpic/blooketcheato/gui.js)
-
 */
 (()=>{
     var Games = {
@@ -31,7 +28,7 @@ ATTENTION: Don't use this for Bookmarklets, it will most likely break. Use gui.j
         document.body.appendChild(UIMain);
         
         window.onkeydown = ((e)=>{
-            if (e.which == 16) {
+            if (e.which == 17) {
                 toggled = !toggled;
                 UIMain.hidden = toggled;
             }
@@ -292,21 +289,34 @@ ATTENTION: Don't use this for Bookmarklets, it will most likely break. Use gui.j
     function questionCheck() {
         if (stateChanger?.state?.question?.correctAnswers !== undefined) {
             answer.innerText = "Answer: " + stateChanger?.state?.question?.correctAnswers?.[0];
+
             if (AutoAnswerToggle) {
-                for (let i = 0; i < 4; i++) {
-                    let question = document.querySelector("#answer" + i + " > div > div > div > div");
-                    if (question?.innerHTML == stateChanger?.state?.question?.correctAnswers?.[0]) {
-                        question.click();
-                        for (let i = 0; i < 20; i++) {
+                for (var i = 0; i < 4; i++) {
+                    var question = document.querySelector("#answer" + i + " > div > div > div > div");
+                    if (question !== undefined && question?.innerHTML == stateChanger?.state?.question?.correctAnswers?.[0]) {
+                        question?.click();
+                        for (var i = 0; i < 20; i++) {
                             document.querySelector("#feedbackButton")?.click();
                         }
                     
                     }
                 }
             }
+        } else if (currentGame == "BattleRoyale") {
+            answer.innerText = "Answer: " + Object.values(document.querySelector('#app > div > div'))[1].children[0]._owner.stateNode?.props.client?.question?.correctAnswers?.[0] || "n/a";
+            if (AutoAnswerToggle) {
+                for (var i = 0; i < 4; i++) {
+                    var question = document.querySelector("#answer" + i + " > div > div > div > div");
+                    if (question !== undefined && question?.innerHTML == Object.values(document.querySelector('#app > div > div'))[1].children[0]._owner.stateNode?.props.client?.question?.correctAnswers?.[0]) {
+                        question?.click();
+                    }
+                }            
+            }
         } else {
             answer.innerText = "Answer: ????";
         }
+
+        
         
         setTimeout(questionCheck, 50);
     }
