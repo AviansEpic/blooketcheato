@@ -108,7 +108,7 @@
         let PasswordCheck = Lib.CreateLabel("Player's Password: ????");
         
         function passcheck() {
-            if (stateChanger.stage == "hack") {
+            if (stateChanger.state.stage == "hack") {
                 PasswordCheck.innerText = "Player's Password: " + stateChanger.correctPassword;
             } else {
                 PasswordCheck.innerText = "Player's Password: ????";
