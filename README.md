@@ -1,5 +1,5 @@
 <h1>! Press Ctrl to turn off/on the GUI.</h1>
-<h1>How to Run?<h1>
+<h1>How to Run?</h1>
 <p>Go to [gui.js](https://github.com/AviansEpic/blooketcheato/blob/main/gui.js) click raw and press Ctrl+A then Ctrl+V.
 Go to your Blooket game and in the url type javascript: then press Ctrl+V and enter</p>
 <h1>How to save as bookmark?</h1>
