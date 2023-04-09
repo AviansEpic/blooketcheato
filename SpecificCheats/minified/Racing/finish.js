@@ -1,0 +1,1 @@
+(()=>{let e=Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner.stateNode;e.setState({progress:e.state.goalAmount});let t=e?.state?.question?.correctAnswers?.[0];if(void 0!==t)for(let r=0;r<4;r++){let i=document.querySelector("#answer"+r+" > div > div > div > div");i?.innerHTML==t&&i.click()}})();

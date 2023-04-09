@@ -1,0 +1,1 @@
+(()=>{var e=document.createElement("iframe");document.body.append(e),window.alert=e.contentWindow.alert.bind(window),e.remove(),"/tower/battle"==window.location.pathname?Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner.stateNode.setState({myHealth:100}):alert("You need to be in battle!")})();

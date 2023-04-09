@@ -1,0 +1,1 @@
+(()=>{var e=document.createElement("iframe");document.body.append(e),window.alert=e.contentWindow.alert.bind(window),e.remove();let t=Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner.stateNode;"hack"!==t.state.stage?alert("You aren't hacking anyone currently!"):alert(t.state.correctPassword)})();
