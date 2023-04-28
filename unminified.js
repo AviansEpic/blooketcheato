@@ -16,7 +16,8 @@
         "/tower": "TowerofDoom",
         "/play/dino": "DeceptiveDino",
         "/play/racing": "Racing",
-        "/play/rush": "BlookRush"
+        "/play/rush": "BlookRush",
+        "/play/brawl": "MonsterBrawl"
     };
     
     function UI() {
@@ -50,7 +51,11 @@
             textbox.style = "background:rgb(26,26,26);color:#ffffff;border-radius:10px;border-color:#000000;";
             textbox.placeholder = placeholder;
             UIMain.children[0].appendChild(textbox);
-            Lib.CreateButton(buttonText, (()=>ondone(textbox.value)));
+            Lib.CreateButton(buttonText, (()=>{
+                let value = textbox.value;
+                if (type == "number") value = Number(value);
+                ondone(value);
+            }));
             UIMain.children[0].appendChild(document.createElement("br"));
             return textbox;
         }
@@ -108,10 +113,10 @@
         let PasswordCheck = Lib.CreateLabel("Player's Password: ????");
         
         function passcheck() {
-            if (stateChanger.state.stage == "hack") {
-                PasswordCheck.innerText = "Player's Password: " + stateChanger.state.correctPassword;
+            if (stateChanger.stage == "hack") {
+                answer.innerText = "Player's Password: " + stateChanger.correctPassword;
             } else {
-                PasswordCheck.innerText = "Player's Password: ????";
+                answer.innerText = "Player's Password: ????";
             }
             
             setTimeout(passcheck, 50);
@@ -143,7 +148,7 @@
         Lib.CreateButton("Complete Wave", ()=>{
             stateChanger.state.game.scene.enemyQueue.length = 0;
             stateChanger.state.game.scene.physics.world.bodies.entries.forEach((enemy)=>{
-                enemy.gameObject.receiveDamage(enemy.gameObject.hp)
+                enemy?.gameObject?.receiveDamage?.(enemy?.gameObject?.hp, 1)
             })
         })
         Lib.CreateButton("OP Towers", ()=>{
@@ -276,6 +281,10 @@
 
             stateChanger.setState({numDefense});
         })
+    } else if(currentGame == "MonsterBrawl") {
+        Lib.CreateButton("Kill All", () => {
+            stateChanger.state.game.scene.physics.world.bodies.entries.forEach(enemy=>enemy?.gameObject?.receiveDamage?.(enemy?.gameObject?.hp, 1))
+        }) 
     }
 
     let AutoAnswerToggle = false;
@@ -307,7 +316,7 @@
             if (AutoAnswerToggle) {
                 for (var i = 0; i < 4; i++) {
                     var question = document.querySelector("#answer" + i + " > div > div > div > div");
-                    if (question !== undefined && question?.innerHTML == Object.values(document.querySelector('#app > div > div'))[1].children[0]._owner.stateNode?.props.client?.question?.correctAnswers?.[0]) {
+                    if (question !== undefined && question?.innerHTML == stateChanger?.state?.question?.correctAnswers?.[0]) {
                         question?.click();
                     }
                 }            
@@ -318,7 +327,7 @@
 
         
         
-        setTimeout(questionCheck, 50);
+        setTimeout(questionCheck, 5);
     }
     
     questionCheck();
